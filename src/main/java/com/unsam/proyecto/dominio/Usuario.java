@@ -1,7 +1,12 @@
 package com.unsam.proyecto.dominio;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Usuario {
 
+	@Id
 	protected Integer idUsuario;
 	protected String nombre;
 	
