@@ -8,18 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.unsam.proyecto.dominio.Usuario;
+import com.unsam.proyecto.excepciones.CredencialesInvalidasExcepcion;
 import com.unsam.proyecto.excepciones.ExcepcionElementoNoEncontrado;
 import com.unsam.proyecto.repositorios.UsuarioRepositorio;
+
+import DTO.UsuarioLogeadoDTO;
+
 
 @Service
 public class UsuarioServicio {
 
 	@Autowired
-	private UsuarioRepositorio usuarioRepositorio; 
+	private UsuarioRepositorio repositorioUsuario; 
 	
 	public Usuario traerUsuarioPorId(Integer idUsuario) {
 		try {
-			return usuarioRepositorio.buscarUsuarioPorId(idUsuario);
+			return repositorioUsuario.findById(idUsuario).get();
 		} catch (Exception e) {
 			throw new ExcepcionElementoNoEncontrado("ERROR: El usuario no se ha encontrado");
 		}
@@ -27,12 +31,22 @@ public class UsuarioServicio {
 
 	public void eliminarUsuario(Integer idUsuario) {
 		Usuario usuarioAEliminar = traerUsuarioPorId(idUsuario);
-		usuarioRepositorio.eliminarUsuario(usuarioAEliminar);
+		repositorioUsuario.delete(usuarioAEliminar);
 	}
 
 	public void actualizarUsuario(Integer idUsuario, Usuario contenido) {
 		Usuario usuarioAModificar = traerUsuarioPorId(idUsuario);
-		usuarioRepositorio.actualizarUsuario(usuarioAModificar,contenido);
+		usuarioAModificar.actualizar(contenido);
+		repositorioUsuario.save(usuarioAModificar);
 	}
 
+	public UsuarioLogeadoDTO validarInicioSesion(String usuario, String contraseña) {
+		try {			
+			Usuario usuarioEncontrado = repositorioUsuario.findByUsuarioAndContraseña(usuario,contraseña);
+			return new UsuarioLogeadoDTO(usuarioEncontrado.getIdUsuario());
+		} catch (Exception error) {
+			throw new CredencialesInvalidasExcepcion("No se ha encontrado un usuario con esas credenciales.Pruebe de nuevo con otras");
+		}
+	}
 }
+

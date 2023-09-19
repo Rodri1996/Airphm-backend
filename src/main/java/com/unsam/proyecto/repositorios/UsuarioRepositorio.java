@@ -7,40 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import com.unsam.proyecto.dominio.Usuario;
 
-@Component
-public class UsuarioRepositorio {
-	ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-	
-	private UsuarioRepositorio() {
-		Usuario usuario1 = new Usuario();
-		usuario1.setIdUsuario(1);
-		usuario1.setNombre("Rodrigo");
-		Usuario usuario2 = new Usuario();
-		usuario2.setIdUsuario(4);
-		usuario2.setNombre("Pedro");
-		usuarios.add(usuario1);
-		usuarios.add(usuario2);
-	}
-	
+public interface UsuarioRepositorio extends CrudRepository<Usuario, Integer> {
 
-	public Usuario buscarUsuarioPorId(Integer idUsuario) {		
-		return usuarios.stream().filter(usuario->usuario.getIdUsuario()==idUsuario).findFirst().get();
-	}
-
-	
-	public void eliminarUsuario(Usuario usuarioAEliminar) {
-		usuarios.remove(usuarioAEliminar);
-	}
-
-
-	public void actualizarUsuario(Usuario usuarioAModificar,Usuario contenido) {
-		usuarioAModificar.actualizar(contenido);
-		
-	}
-
+	Usuario findByUsuarioAndContraseña(String usuario, String contraseña);
 
 }
