@@ -1,5 +1,7 @@
 package com.unsam.proyecto;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,10 +40,19 @@ public class ProyectoBootstrap implements InitializingBean{
 	
 		hospedaje1.setDestino("Argentina");
 		hospedaje1.setPuntaje(3);
+		hospedaje1.setNombre("Departamento en centro turistico a orillas del mar");
+		hospedaje1.setDescripcion("Cuenta con un living luminoso,dos baños y cochera");
+		hospedaje1.setUbicacion("Lincoln 1234");
+		hospedaje1.setCostoPorNoche(1500.50);
+		hospedaje1.setHuespedes(3);
+		
 		hospedaje2.setDestino("Brasil");
 		hospedaje2.setPuntaje(4);
+		hospedaje2.setHuespedes(2);
+		
 		hospedaje3.setDestino("Argentina");
 		hospedaje3.setPuntaje(4);
+		hospedaje3.setHuespedes(1);
 		
 		unHospedajeRepositorio.save(hospedaje1);
 		unHospedajeRepositorio.save(hospedaje2);

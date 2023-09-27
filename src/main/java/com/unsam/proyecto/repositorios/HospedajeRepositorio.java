@@ -6,6 +6,6 @@ import com.unsam.proyecto.dominio.Hospedaje;
 
 public interface HospedajeRepositorio extends CrudRepository<Hospedaje, Integer>{
 
-	Iterable<Hospedaje> findAllByPuntaje(Integer puntaje);
+	Iterable<Hospedaje> findAllByDestino(String destino);
 
 }
