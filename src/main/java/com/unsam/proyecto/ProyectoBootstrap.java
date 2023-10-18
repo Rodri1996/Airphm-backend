@@ -47,7 +47,7 @@ public class ProyectoBootstrap implements InitializingBean{
 		hospedaje1.setImagen("");
 		hospedaje1.setPaisDestino("Brasil");
 		hospedaje1.setHuespedes(3);
-		
+
 		hospedaje2.setNombre("Departamento a orillas del mar");
 		hospedaje2.setDescripcion("Tiene living luminoso y vista al mar");
 		hospedaje2.setUbicacion("Calle false 1234");

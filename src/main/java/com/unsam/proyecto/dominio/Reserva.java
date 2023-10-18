@@ -7,10 +7,9 @@ public class Reserva {
 	public LocalDate reservadoDesde;
 	public LocalDate reservadoHasta;
 	
-	public boolean vigente(LocalDate fechaDesde, LocalDate fechaHasta) {
-		return (fechaDesde.isBefore(reservadoDesde) && fechaHasta.isBefore(reservadoHasta))
-				|| (fechaDesde.isAfter(reservadoHasta) && fechaDesde.isAfter(reservadoHasta));
-				
+	public boolean disponible(LocalDate fechaDesde, LocalDate fechaHasta) {
+	    return (fechaDesde.isBefore(reservadoDesde) && fechaHasta.isBefore(reservadoDesde))
+	    		|| (fechaDesde.isAfter(reservadoHasta) && fechaHasta.isAfter(reservadoHasta));
 	}
 
 }

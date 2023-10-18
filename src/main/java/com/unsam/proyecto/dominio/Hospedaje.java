@@ -213,12 +213,19 @@ public abstract class Hospedaje {
 
 	public boolean estaLibre(LocalDate fechaDesde, LocalDate fechaHasta) {
 		Boolean libre=false;
+		if(!this.tieneReservas()) {
+			libre = true;
+		}
 		for (Reserva reserva : reservas) {
-			if(reserva.vigente(fechaDesde,fechaHasta)) {
+			if(reserva.disponible(fechaDesde,fechaHasta)) {
 				libre = true;
 			}
 		}
 		return libre;
+	}
+
+	private boolean tieneReservas() {
+		return reservas.size()>0;
 	}
 
 	public void agregarReserva(Reserva reserva) {
