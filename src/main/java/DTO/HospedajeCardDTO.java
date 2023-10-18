@@ -3,6 +3,7 @@ package DTO;
 import com.unsam.proyecto.dominio.Hospedaje;
 
 public class HospedajeCardDTO {
+	Integer id;
 	String imagen;
 	String nombre;
 	String descripcion;
@@ -16,6 +17,7 @@ public class HospedajeCardDTO {
 	
 	public static HospedajeCardDTO crearDTO(Hospedaje h) {
 		HospedajeCardDTO hospedajeCardDTO = new HospedajeCardDTO();
+		hospedajeCardDTO.id = h.getId();
 		hospedajeCardDTO.imagen = h.getImagen();
 		hospedajeCardDTO.nombre = h.getNombre();
 		hospedajeCardDTO.descripcion = h.getDescripcion();
@@ -23,6 +25,15 @@ public class HospedajeCardDTO {
 		hospedajeCardDTO.puntaje = h.getPuntaje();
 		hospedajeCardDTO.costoPorNoche = h.getCostoPorNoche();
 		return hospedajeCardDTO;
+	}
+	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getImagen() {

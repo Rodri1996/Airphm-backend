@@ -1,5 +1,6 @@
 package com.unsam.proyecto.servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -17,9 +18,20 @@ public class ServicioHospedaje {
 	@Autowired
 	private RepositorioHospedaje repositorioHospedaje;
 
-	public ArrayList<HospedajeCardDTO> hospedajesFiltrados() {
+	public ArrayList<HospedajeCardDTO> filtrarHospedajes(
+			String destino, 
+			Double puntaje,
+			Integer pasajeros, 
+			LocalDate fechaDesde, 
+			LocalDate fechaHasta) {
 		ArrayList<HospedajeCardDTO> hospedajesMapeados = new ArrayList<HospedajeCardDTO>();
-		ArrayList<Hospedaje> hospedajes = repositorioHospedaje.hospedajesFiltrados();
+		ArrayList<Hospedaje> hospedajes = repositorioHospedaje.hospedajesFiltrados(
+				destino,
+				puntaje, 
+				pasajeros, 
+				fechaDesde, 
+				fechaHasta);
+
 		for (Hospedaje hospedaje : hospedajes) {
 			HospedajeCardDTO h = HospedajeCardDTO.crearDTO(hospedaje);
 			hospedajesMapeados.add(h);

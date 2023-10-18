@@ -1,12 +1,15 @@
 package com.unsam.proyecto.dominio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public abstract class Hospedaje {
 	
+	protected Integer id;
 	protected String imagen;
 	protected String nombre;
 	protected String descripcion;
+	protected String paisDestino;
 	protected String ubicacion;
 	protected Double puntaje;
 	protected Double costoPorNoche;
@@ -19,11 +22,25 @@ public abstract class Hospedaje {
 	protected ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	protected ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getPaisDestino() {
+		return paisDestino;
+	}
+
+	public void setPaisDestino(String paisDestino) {
+		this.paisDestino = paisDestino;
+	}
+
 	public Double getCostoPorNoche() {
 		return costoPorNoche;
 	}
-
-
 
 	public void setCostoPorNoche(Double costoPorNoche) {
 		this.costoPorNoche = costoPorNoche;
@@ -168,24 +185,43 @@ public abstract class Hospedaje {
 	}
 
 
-
-	public void setReservas(ArrayList<Reserva> reservas) {
-		this.reservas = reservas;
-	}
-
-
-
 	public ArrayList<Calificacion> getCalificaciones() {
 		return calificaciones;
 	}
 
 
+	public abstract void plus();
 
-	public void setCalificaciones(ArrayList<Calificacion> calificaciones) {
-		this.calificaciones = calificaciones;
+	public void calcularPuntajePromedio() {
+		Integer puntajeAcumulado = 0;
+		Double puntajePromedio;
+		for (Calificacion calificacion : calificaciones) {
+			puntajeAcumulado=puntajeAcumulado+calificacion.getPuntaje();
+		}
+		Integer cantCalificaciones = calificaciones.size();
+		if(cantCalificaciones>0) {
+			puntajePromedio = (double) (puntajeAcumulado/cantCalificaciones);
+		}else {
+			puntajePromedio = 0.0;
+		}
+		this.setPuntaje(puntajePromedio);
 	}
 
+	public void calificar(Calificacion calificacion) {
+		calificaciones.add(calificacion);
+	}
 
+	public boolean estaLibre(LocalDate fechaDesde, LocalDate fechaHasta) {
+		Boolean libre=false;
+		for (Reserva reserva : reservas) {
+			if(reserva.vigente(fechaDesde,fechaHasta)) {
+				libre = true;
+			}
+		}
+		return libre;
+	}
 
-	public abstract void plus();
+	public void agregarReserva(Reserva reserva) {
+		reservas.add(reserva);
+	}
 }
