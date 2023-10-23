@@ -231,4 +231,8 @@ public abstract class Hospedaje {
 	public void agregarReserva(Reserva reserva) {
 		reservas.add(reserva);
 	}
+
+	public Integer getCantOpiniones() {
+		return calificaciones.size();
+	}
 }

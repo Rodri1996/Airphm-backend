@@ -74,6 +74,10 @@ public class RepositorioHospedaje {
 		hospedaje1.setId(id);
 		hospedajes.add(hospedaje1);
 	}
+
+	public Hospedaje traerHospedaje(Integer id) {
+		return hospedajes.stream().filter(h->h.getId().equals(id)).findFirst().get();
+	}
 	
 	
 
