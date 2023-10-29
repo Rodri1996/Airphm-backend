@@ -14,6 +14,7 @@ import com.unsam.proyecto.dominio.Hospedaje;
 import com.unsam.proyecto.dominio.Reserva;
 import com.unsam.proyecto.dominio.Usuario;
 import com.unsam.proyecto.repositorios.RepositorioHospedaje;
+import com.unsam.proyecto.repositorios.RepositorioUsuarios;
 
 @Service
 public class ProyectoBootstrap implements InitializingBean{
@@ -27,6 +28,8 @@ public class ProyectoBootstrap implements InitializingBean{
 	
 	@Autowired
 	RepositorioHospedaje repositorioHospedaje;
+	@Autowired
+	private RepositorioUsuarios repositorioUsuarios;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -70,7 +73,16 @@ public class ProyectoBootstrap implements InitializingBean{
 	}
 
 	private void inicializarUsuarios() {
+		usuario1 = new Usuario();
+		usuario1.setNombreUsuario("Rodri1996");
+		usuario1.setContraseña("1234");
 		
+		usuario2 = new Usuario();
+		usuario2.setNombreUsuario("LeoMessi");
+		usuario2.setContraseña("Messi10");
+		
+		repositorioUsuarios.guardar(usuario1);
+		repositorioUsuarios.guardar(usuario2);
 	}
 
 }

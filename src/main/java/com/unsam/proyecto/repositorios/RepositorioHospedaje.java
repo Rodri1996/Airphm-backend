@@ -69,10 +69,10 @@ public class RepositorioHospedaje {
 		return hospedajesPorDestino;
 	}
 
-	public void guardar(Hospedaje hospedaje1) {
+	public void guardar(Hospedaje hospedaje) {
 		id+=1;
-		hospedaje1.setId(id);
-		hospedajes.add(hospedaje1);
+		hospedaje.setId(id);
+		hospedajes.add(hospedaje);
 	}
 
 	public Hospedaje traerHospedaje(Integer id) {
