@@ -20,11 +20,14 @@ public class RepositorioHospedaje {
 	public ArrayList<Hospedaje> hospedajesFiltrados(
 			String destino, 
 			Double puntaje,
-			Integer pasajeros, LocalDate fechaHasta, LocalDate fechaDesde) {
+			Integer pasajeros, 
+			LocalDate fechaHasta, 
+			LocalDate fechaDesde) {
 		ArrayList<Hospedaje> hospedajesPorDestino = this.filtrarPorDestino(destino);
 		ArrayList<Hospedaje> hospedajesPorPuntaje = this.filtrarPorPuntaje(puntaje,hospedajesPorDestino);
 		ArrayList<Hospedaje> hospedajesPorPasajeros = this.filtrarPorPasajeros(pasajeros,hospedajesPorPuntaje);
 		ArrayList<Hospedaje> hospedajesPorFechas = this.filtrarPorFechas(fechaDesde,fechaHasta,hospedajesPorPasajeros);
+		hospedajesPorFechas.forEach(h->h.calcularCostoTotal(fechaDesde,fechaHasta));
 		return hospedajesPorFechas;
 	}
 

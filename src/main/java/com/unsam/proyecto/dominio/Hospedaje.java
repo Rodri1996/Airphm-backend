@@ -1,6 +1,7 @@
 package com.unsam.proyecto.dominio;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public abstract class Hospedaje {
@@ -13,6 +14,7 @@ public abstract class Hospedaje {
 	protected String ubicacion;
 	protected Double puntaje;
 	protected Double costoPorNoche;
+	protected Double costoTotal;
 	protected Integer baños;
 	protected Integer habitaciones;
 	protected Integer huespedes;
@@ -22,6 +24,14 @@ public abstract class Hospedaje {
 	protected ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	protected ArrayList<Calificacion> calificaciones = new ArrayList<Calificacion>();
 	
+	public Double getCostoTotal() {
+		return costoTotal;
+	}
+
+	public void setCostoTotal(Double costoTotal) {
+		this.costoTotal = costoTotal;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -234,5 +244,9 @@ public abstract class Hospedaje {
 
 	public Integer getCantOpiniones() {
 		return calificaciones.size();
+	}
+
+	public void calcularCostoTotal(LocalDate fechaDesde, LocalDate fechaHasta) {
+		costoTotal = costoPorNoche*ChronoUnit.DAYS.between(fechaHasta, fechaDesde);
 	}
 }

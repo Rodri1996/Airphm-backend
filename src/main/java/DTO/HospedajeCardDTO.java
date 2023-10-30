@@ -10,6 +10,7 @@ public class HospedajeCardDTO {
 	String ubicacion;
 	Double puntaje;
 	Double costoPorNoche;
+	private Double costoTotal;
 
 	public HospedajeCardDTO() {
 		
@@ -24,9 +25,17 @@ public class HospedajeCardDTO {
 		hospedajeCardDTO.ubicacion = h.getUbicacion();
 		hospedajeCardDTO.puntaje = h.getPuntaje();
 		hospedajeCardDTO.costoPorNoche = h.getCostoPorNoche();
+		hospedajeCardDTO.costoTotal = h.getCostoTotal();
 		return hospedajeCardDTO;
 	}
 	
+	public Double getCostoTotal() {
+		return costoTotal;
+	}
+
+	public void setCostoTotal(Double costoTotal) {
+		this.costoTotal = costoTotal;
+	}
 
 	public Integer getId() {
 		return id;
